@@ -1,7 +1,7 @@
 ﻿using System.Threading.Channels;
 while (true)
 {
-    Console.WriteLine(" 1.Monday \n 2.Tuesday \n 3.Wednesday \n 4.Thursday \n 5.Friday \n 6.Saturday \n 7.Sunday");
+    Console.WriteLine("\n 1.Monday \n 2.Tuesday \n 3.Wednesday \n 4.Thursday \n 5.Friday \n 6.Saturday \n 7.Sunday");
     Console.WriteLine("Select a day to assign Task or any key to exit");
 
 
@@ -37,17 +37,36 @@ while (true)
 }
 void AddToDo(string day)
 {
-    Console.WriteLine("Enter a task");
-    string task = Console.ReadLine();
-    Console.WriteLine("Timing update");
-    bool convertable = TimeOnly.TryParse(Console.ReadLine(),out TimeOnly time);
-    if (!convertable)
+    List<string> TaskandTime = new List<string>();
+    while (true)
     {
-        Console.WriteLine("Wrong input");
-        return;
+        Console.WriteLine("Enter a task");
+        string task = Console.ReadLine();
+        Console.WriteLine("Timing update");
+        bool convertable = TimeOnly.TryParse(Console.ReadLine(), out TimeOnly time);
+        if (!convertable)
+        {
+            Console.WriteLine("Wrong input");
+            return;
+        }
+        Console.WriteLine("You have successfully added your Task");
+        string taskCreated = $"{task} by {time}";
+        Console.WriteLine(taskCreated);
+        TaskandTime.Add(taskCreated);
+        Console.WriteLine("");
+        Console.WriteLine("Do you want to add another task? N to stop or any key to continue ");
+        string n = Console.ReadLine().ToLower();
+        if (n == "n")
+        {
+            foreach (var item in TaskandTime)
+            {
+                Console.WriteLine(item);
+            }
+            return;
+        }
     }
-    Console.WriteLine("You have successfully added your Task");
-    Console.WriteLine($"{task} by {time}");
+    
+
 }
 
 
